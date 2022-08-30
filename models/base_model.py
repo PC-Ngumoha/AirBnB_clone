@@ -19,12 +19,32 @@ class BaseModel():
         updated_at (datetime): A datetime object assigned to each instance
             of BaseModel at initialization, and is reset when save() is called.
     '''
-    def __init__(self):
-        '''Initialization method, called each time an instance is created
+    def __init__(self, *args, **kwargs):
+        '''Initialization method, called each time an instance is created.
+        If kwargs is not empty, an new instance is created from the key/value
+        pairs found in kwargs, otherwise a completely new object is created
+
+        Args:
+            *args: Variable length argument list.
+                It is not used when new object is initialized.
+            **kwargs: Arbitrary kewword arguments. With the following expected:
+                id, created_at, updated_at.
         '''
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        if kwargs:
+            if ('created_at' in kwargs.keys()):
+                kwargs['created_at'] = datetime.fromisoformat(
+                    kwargs['created_at']
+                )
+            if ('updated_at' in kwargs.keys()):
+                kwargs['updated_at'] = datetime.fromisoformat(
+                    kwargs['updated_at']
+                )
+            self.__dict__ = {key: kwargs[key] for key in kwargs.keys()
+                             if key != '__class__'}
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         '''Method to set the string representation of BaseModel object.
