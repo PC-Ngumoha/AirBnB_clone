@@ -31,11 +31,11 @@ class BaseModel():
                 id, created_at, updated_at.
         '''
         if kwargs:
-            if ('created_at' in kwargs.keys()):
+            if 'created_at' in kwargs.keys():
                 kwargs['created_at'] = datetime.fromisoformat(
                     kwargs['created_at']
                 )
-            if ('updated_at' in kwargs.keys()):
+            if 'updated_at' in kwargs.keys():
                 kwargs['updated_at'] = datetime.fromisoformat(
                     kwargs['updated_at']
                 )
