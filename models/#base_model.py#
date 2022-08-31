@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+'''
+Defines BaseModel as super class for all aother classes in AirBnB Project
+'''
+
+class BaseModel():
+    '''
+    BaseModel provides all methods and attributes for
+    subclasses in the AirBnb project.
+
+    Attributes:
+        id (string): Assigned as a unique identifier for
+            each instance of BaseModel created using uuid4().
+        created_at (datetime): A Datetime object assigned to BaseModels
+            when instances are created.
+        updated_at (datetime): A datetime object assigned to each instance 
+            of Basemodel at initialization and updated each time save() is called.
+    '''
+    
