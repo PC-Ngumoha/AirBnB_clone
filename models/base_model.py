@@ -4,6 +4,7 @@ Defines BaseModel as super class for all aother classes in AirBnB Project
 '''
 import uuid
 from datetime import datetime
+import storage
 
 
 class BaseModel():
@@ -45,6 +46,7 @@ class BaseModel():
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         '''Method to set the string representation of BaseModel object.
@@ -58,6 +60,7 @@ class BaseModel():
     def save(self):
         '''Updates the public attribute `updated_at` with the current time
         '''
+        storage.save()
         self.updated_at = datetime.now()
 
     def to_dict(self):
