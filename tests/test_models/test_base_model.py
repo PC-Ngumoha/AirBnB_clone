@@ -6,8 +6,8 @@ from datetime import datetime
 from models.base_model import BaseModel
 
 
-class TestBaseModel(unittest.TestCase):
-    '''TestBaseModel test class.
+class TestBaseModelClass(unittest.TestCase):
+    '''TestBaseModelClass test class.
     '''
 
     def test_if_public_attribute(self):

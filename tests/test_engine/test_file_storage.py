@@ -4,11 +4,11 @@
 import unittest
 import json
 from models import storage
-from models.base_models import BaseModel
+from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 
-class TestFileStorage(unittest.TestCase):
+class TestFileStorageClass(unittest.TestCase):
     '''TestFileStorage class built to test regular
     and edge case usage of FileStorage Class.
     Inherits from TestCase class in unittest module.
