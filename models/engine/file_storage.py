@@ -12,11 +12,15 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
 
-     
     def all(self):
         '''Returns the contents of the '__objects' dictionary
         '''
-        return FileStorage.__objects
+        from ..base_model import BaseModel  # Used A Deferred Import
+        objs_dict = {}
+        for obj_id in FileStorage.__objects.keys():
+            temp = FileStorage.__objects[obj_id]
+            objs_dict[obj_id] = BaseModel(**temp)
+        return objs_dict
 
     def new(self, obj):
         '''Adds the object 'obj' to the collection of objects in the

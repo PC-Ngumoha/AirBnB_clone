@@ -62,6 +62,7 @@ class BaseModel():
         '''
         storage.save()
         self.updated_at = datetime.now()
+        self.created_at = datetime.fromisoformat(self.__dict__['created_at'])
 
     def to_dict(self):
         '''This method is used for serialization of object by returning the
