@@ -7,7 +7,7 @@ from datetime import datetime
 from . import storage
 
 
-class BaseModel():
+class BaseModel:
     '''
     BaseModel provides all methods and attributes for
     subclasses in the AirBnb project.
@@ -32,20 +32,15 @@ class BaseModel():
                 id, created_at, updated_at.
         '''
         if kwargs:
-            if 'created_at' in kwargs.keys():
-                kwargs['created_at'] = datetime.fromisoformat(
-                    kwargs['created_at']
-                )
-            if 'updated_at' in kwargs.keys():
-                kwargs['updated_at'] = datetime.fromisoformat(
-                    kwargs['updated_at']
-                )
-            self.__dict__ = {key: kwargs[key] for key in kwargs.keys()
-                             if key != '__class__'}
+            for key, value in kwargs.items():
+                if key != "__class__":
+                    if key in ["created_at", "updated_at"]:
+                        setattr(self, key, datetime.fromisoformat(value))
+                    else:
+                        setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            self.created_at = self.updated_at = datetime.now()
             storage.new(self)
 
     def __str__(self):
@@ -62,7 +57,6 @@ class BaseModel():
         '''
         storage.save()
         self.updated_at = datetime.now()
-        self.created_at = datetime.fromisoformat(self.__dict__['created_at'])
 
     def to_dict(self):
         '''This method is used for serialization of object by returning the
@@ -73,8 +67,8 @@ class BaseModel():
             of the instance. A key __class__ is added to this dictionary
             with the class name of the object
         '''
-        obj_dict = self.__dict__
-        obj_dict['created_at'] = self.created_at.isoformat()
-        obj_dict['updated_at'] = self.updated_at.isoformat()
-        obj_dict['__class__'] = self.__class__.__name__
-        return obj_dict
+        result = self.__dict__.copy()
+        result['created_at'] = self.created_at.isoformat()
+        result['updated_at'] = self.updated_at.isoformat()
+        result['__class__'] = self.__class__.__name__
+        return result
