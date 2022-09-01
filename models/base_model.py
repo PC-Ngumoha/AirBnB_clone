@@ -4,7 +4,7 @@ Defines BaseModel as super class for all aother classes in AirBnB Project
 '''
 import uuid
 from datetime import datetime
-import storage
+from . import storage
 
 
 class BaseModel():
