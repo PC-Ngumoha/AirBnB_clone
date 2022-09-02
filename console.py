@@ -1,13 +1,15 @@
 #!/usr/bin/python3
 '''Contains the definition of the 'HBNBCommand' class which is
 to serve as the console for the HBNB project.'''
-from cmd import Cmd
+
+
+import cmd
+import json
 from models import storage
 from models.base_model import BaseModel
-from models.engine.file_storage import FileStorage
 
 
-class HBNBCommand(Cmd):
+class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     class_names = ('BaseModel', )
 
@@ -29,17 +31,73 @@ class HBNBCommand(Cmd):
     def do_create(self, line):
         '''Creates a new instance of a specified class.
         '''
-        pass
+        args = line.split()
+        if len(args) != 1:
+            print("** class name missing **")
+        else:
+            class_name = args[0].strip()
+            if class_name in HBNBCommand.class_names:
+                obj = eval(class_name)()
+                obj.save()
+                print(obj.id)
+            else:
+                print("** class doesn't exist **")
 
     def do_show(self, line):
         '''Prints the string representation of an instance with the exact id
         '''
-        pass
+        args = line.split()
+        if len(args) >= 1:
+            class_name = args[0].strip()
+            if class_name in HBNBCommand.class_names:
+                if len(args) == 2:
+                    search_id = args[1].strip()
+                    search_key = "{}.{}".format(class_name, search_id)
+                    storage.reload()
+                    obj_dict = storage.all()
+                    if search_key in obj_dict.keys():
+                        obj = obj_dict[search_key]
+                        print(obj)
+                    else:
+                        print("** no instance found **")
+                else:
+                    print("** instance id missing **")
+            else:
+                print("** class doesn't exist **")
+        else:
+            print("** class name missing **")
 
     def do_destroy(self, line):
         '''Deletes an instance based on the class name and id
         '''
-        pass
+        args = line.split()
+        if len(args) >= 1:
+            class_name = args[0].strip()
+            if class_name in HBNBCommand.class_names:
+                if len(args) == 2:
+                    search_id = args[1].strip()
+                    search_key = "{}.{}".format(class_name, search_id)
+                    storage.reload()
+                    obj_dict = storage.all()
+                    if search_key in obj_dict.keys():
+                        del obj_dict[search_key]
+                        # Overwrite the JSON file with the present contents of
+                        # obj_dict dictionary.
+                        temp_dict = {}
+                        file_name = storage.file_path
+                        for key in obj_dict.keys():
+                            obj = obj_dict[key]
+                            temp_dict[key] = obj.to_dict()
+                        with open(file_name, 'w', encoding='utf-8') as fp:
+                            json.dump(temp_dict, fp)
+                    else:
+                        print("** no instance found **")
+                else:
+                    print("** instance id missing **")
+            else:
+                print("** class doesn't exist **")
+        else:
+            print("** class name missing **")
 
     def do_all(self, line):
         '''Prints the string form of all instances of the specified class name
