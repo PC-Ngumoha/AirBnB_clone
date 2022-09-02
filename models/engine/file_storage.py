@@ -12,12 +12,6 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
 
-    @property
-    def file_path(self):
-        '''enables us access the name of the JSON file through an instance
-        of the class
-        '''
-        return FileStorage.__file_path
 
     def all(self):
         '''Returns the contents of the '__objects' dictionary
@@ -40,7 +34,7 @@ class FileStorage:
         '''Saves the contents of the '__objects' dictionary to the json file
         specified in the '__file_path' class attribute.
         '''
-        with open(self.file_path, 'w', encoding='utf-8') as fp:
+        with open(FileStorage.__file_path, 'w', encoding='utf-8') as fp:
             json.dump(FileStorage.__objects, fp)
 
     def reload(self):
@@ -48,9 +42,18 @@ class FileStorage:
         retrieved for the file.json file.
         '''
         try:
-            with open(self.file_path, 'r', encoding='utf-8') as fp:
+            with open(FileStorage.__file_path, 'r', encoding='utf-8') as fp:
                 FileStorage.__objects = json.load(fp)
         except NameError:
             pass
         except IOError:
             pass
+
+    def delete(self, key):
+        '''deletes an entry from the __objects class attribute and updates the
+        file
+        '''
+        if key in FileStorage.__objects.keys():
+            del FileStorage.__objects[key]
+            with open(FileStorage.__file_path, 'w', encoding='utf-8') as fp:
+                json.dump(FileStorage.__objects, fp)
