@@ -4,7 +4,6 @@ to serve as the console for the HBNB project.'''
 
 
 import cmd
-import json
 from models import storage
 from models.base_model import BaseModel
 
@@ -80,16 +79,7 @@ class HBNBCommand(cmd.Cmd):
                     storage.reload()
                     obj_dict = storage.all()
                     if search_key in obj_dict.keys():
-                        del obj_dict[search_key]
-                        # Overwrite the JSON file with the present contents of
-                        # obj_dict dictionary.
-                        temp_dict = {}
-                        file_name = storage.file_path
-                        for key in obj_dict.keys():
-                            obj = obj_dict[key]
-                            temp_dict[key] = obj.to_dict()
-                        with open(file_name, 'w', encoding='utf-8') as fp:
-                            json.dump(temp_dict, fp)
+                        storage.delete(search_key)
                     else:
                         print("** no instance found **")
                 else:
