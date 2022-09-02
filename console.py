@@ -2,6 +2,8 @@
 '''Contains the definition of the 'HBNBCommand' class which is
 to serve as the console for the HBNB project.'''
 from cmd import Cmd
+from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(Cmd):
@@ -43,7 +45,7 @@ class HBNBCommand(Cmd):
         '''
         pass
 
-    def update(self, line):
+    def do_update(self, line):
         '''Updates an instance based on a class name and id.
         '''
         pass
