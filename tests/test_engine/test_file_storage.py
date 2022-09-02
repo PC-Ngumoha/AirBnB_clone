@@ -49,13 +49,14 @@ class TestFileStorageClass(unittest.TestCase):
         returns private class attribute `__objects`
         '''
         self.assertEqual(
-            {key: storage.all()[key].to_dict() for key in storage.all().keys()},
+            {key: storage.all()[key].to_dict() for key in
+             storage.all().keys()},
             storage._FileStorage__objects
         )
 
     def test_all_return_type(self):
-        '''Test ensure the dictionary returned by `all()` public instance method
-        has values of type/subtype BaseModel.
+        '''Test ensure the dictionary returned by `all()` public
+        instance method has values of type/subtype BaseModel.
         '''
         for value in storage.all().values():
             self.assertIsInstance(value, BaseModel)

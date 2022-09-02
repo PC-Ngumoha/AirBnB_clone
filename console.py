@@ -110,7 +110,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) >= 1:
             class_name = args[0]
             if class_name in HBNBCommand.class_names:
-                if len(args) >=2:
+                if len(args) >= 2:
                     instance_id = args[1]
                     obj_dict = storage.all()
                     key = f"{class_name}.{instance_id}"
