@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 '''Definition of User class
 '''
 from base_model import BaseModel
