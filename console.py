@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 '''Contains the definition of the 'HBNBCommand' class which is
 to serve as the console for the HBNB project.'''
+
+
 import cmd
 from models import storage
 from models.base_model import BaseModel
@@ -90,7 +92,16 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, line):
         '''Prints the string form of all instances of the specified class name
         '''
-        pass
+        if line in HBNBCommand.class_names or line == "":
+            obj_dict = storage.all()
+            if line:
+                obj_list = [str(item) for item in obj_dict.values()
+                            if item.__class__.__name__ == line]
+            else:
+                obj_list = [str(item) for item in obj_dict.values()]
+            print(obj_list)
+        else:
+            print("** class doesn't exist **")
 
     def do_update(self, line):
         '''Updates an instance based on a class name and id.
