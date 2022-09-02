@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 '''Contains the definition of the 'HBNBCommand' class which is
 to serve as the console for the HBNB project.'''
-from cmd import Cmd
+import cmd
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 
-class HBNBCommand(Cmd):
+class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     class_names = ('BaseModel', )
 
