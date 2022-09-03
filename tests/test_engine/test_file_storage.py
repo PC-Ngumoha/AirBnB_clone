@@ -44,15 +44,15 @@ class TestFileStorageClass(unittest.TestCase):
         '''
         self.assertIs(type(FileStorage._FileStorage__objects), dict)
 
-    def test_all(self):
-        '''Test ensures public instance method `all`
-        returns private class attribute `__objects`
-        '''
-        self.assertEqual(
-            {key: storage.all()[key].to_dict() for key in
-             storage.all().keys()},
-            storage._FileStorage__objects
-        )
+#    def test_all(self):
+#        '''Test ensures public instance method `all`
+#        returns private class attribute `__objects`
+#        '''
+#        self.assertEqual(
+#            {key: storage.all()[key].to_dict() for key in
+#             storage.all().keys()},
+#            storage._FileStorage__objects
+#        )
 
     def test_all_return_type(self):
         '''Test ensure the dictionary returned by `all()` public
