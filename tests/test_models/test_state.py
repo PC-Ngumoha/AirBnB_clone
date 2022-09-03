@@ -15,14 +15,19 @@ class TestState(unittest.TestCase):
         self.state1.save()
 
     def test_inherit_from_BaseModel(self):
-        '''test if the instance of class 'State' inherits from 'BaseModel'
+        '''Test if the instance of class 'State' inherits from 'BaseModel'
         '''
         self.assertIsInstance(self.state1, BaseModel)
 
     def test_hasattr_name(self):
-        '''test if the 'State' class instance has the 'name' class attribute
+        '''Test if the 'State' class has the 'name' class attribute
         '''
-        self.assertTrue(hasattr(self.state1, "name"))
+        self.assertTrue(hasattr(State, "name"))
+
+    def test_name_type(self):
+        '''Tests the type of the 'name' class attribute
+        '''
+        self.assertIsInstance(State.name, str)
 
 
 if __name__ == '__main__':

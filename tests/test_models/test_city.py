@@ -20,14 +20,24 @@ class TestCity(unittest.TestCase):
         self.assertIsInstance(self.city1, BaseModel)
 
     def test_hasattr_name(self):
-        '''Tests if the instance of 'City' class has 'name' class attribute
+        '''Tests that the 'City' class has a 'name' class attribute
         '''
-        self.assertTrue(hasattr(self.city1, "name"))
+        self.assertTrue(hasattr(City, "name"))
+
+    def test_name_type(self):
+        '''Tests the type of the 'name' class attribute.
+        '''
+        self.assertIsInstance(City.name, str)
 
     def test_hasattr_state_id(self):
-        '''Tests if the instance of 'City' class has 'state_id' class attribute
+        '''Tests that the 'City' class has 'state_id' class attribute
         '''
-        self.assertTrue(hasattr(self.city1, "state_id"))
+        self.assertTrue(hasattr(City, "state_id"))
+
+    def test_state_id_type(self):
+        '''Tests the type of the 'state_id' class attribute.
+        '''
+        self.assertIsInstance(City.state_id, str)
 
 
 if __name__ == '__main__':
