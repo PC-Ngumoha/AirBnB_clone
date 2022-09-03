@@ -15,10 +15,17 @@ class FileStorage:
     def all(self):
         '''Returns the contents of the '__objects' dictionary
         '''
-        from ..base_model import BaseModel  # Used A Deferred Import
-        from ..user import User
+        # Deferred Imports
+        # from models.amenity import Amenity
+        from models.base_model import BaseModel
+        from models.city import City
+        # from models.place import Place
+        # from models.review import Review
+        from models.state import State
+        from models.user import User
 
-        class_names = ('BaseModel', 'User')
+        class_names = ('BaseModel', 'User', 'Place', 'City', 'State',
+                       'Amenity', 'Review')
         objs_dict = {}
         for obj_id in FileStorage.__objects.keys():
             args = obj_id.split('.')
