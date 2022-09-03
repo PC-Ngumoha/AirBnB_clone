@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 '''Definition of User class
 '''
-from base_model import BaseModel
+from models.base_model import BaseModel
 
 
 class User(BaseModel):
@@ -13,10 +13,7 @@ class User(BaseModel):
         first_name (string): Users first name.
         last_name (string): Users last name.
     '''
-    def __init__(self):
-        '''Defines steps to follow when object is initialized
-        '''
-        self.email = ""
-        self.password = ""
-        self.first_name = ""
-        self.last_name = ""
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""

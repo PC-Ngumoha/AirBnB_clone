@@ -10,7 +10,7 @@ from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
-    class_names = ('BaseModel', )
+    class_names = ('BaseModel', 'User')
 
     def emptyline(self):
         '''Is called when an empty line is passed to the console.
@@ -96,7 +96,7 @@ class HBNBCommand(cmd.Cmd):
             obj_dict = storage.all()
             if line:
                 obj_list = [str(item) for item in obj_dict.values()
-                            if item.__class__.__name__ == line]
+                            if item.__class__.__name__ == line.strip()]
             else:
                 obj_list = [str(item) for item in obj_dict.values()]
             print(obj_list)
