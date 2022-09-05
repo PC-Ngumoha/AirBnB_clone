@@ -14,6 +14,37 @@ from models.state import State
 from models.user import User
 
 
+def parse_line(line):
+    '''parse_line function.
+
+    Description: Gets a line and then parses it, then returns an array
+    containing:
+        The class name (string) (Always first element in array)
+        The method name (string) (Always second element in array)
+        The ID (string) (If available)
+        The attribute name (string) (If available)
+        The attribute value (string) (If available)
+    '''
+    result = []
+    parameters = []
+    args = line.split('.')
+    if len(args) <= 1:
+        return result
+    else:
+        class_name = args[0].strip()
+        args = args[1].split('(')
+        method_name = args[0].strip()
+        args = args[1].split(',')
+        result.extend([class_name, method_name])
+        for i in range(len(args)):
+            elem = args[i].strip(')')
+            parameters.append(elem)
+        for j in range(len(parameters)):
+            elem = parameters[j]
+            result.append((elem.strip()).strip('"'))
+    return result
+
+
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     class_names = ('BaseModel', 'User', 'Place', 'State', 'City',
@@ -23,6 +54,49 @@ class HBNBCommand(cmd.Cmd):
         '''Is called when an empty line is passed to the console.
         '''
         pass
+
+    def default(self, line):
+        '''Defines the default behaviour of the program
+        '''
+        args = line.split()
+        command = args[0].strip()
+        line_str = ' '.join(args[1:])
+        try:
+            func = getattr(self, 'do_' + command)
+        except AttributeError:
+            print(f"*** Unknown syntax: {command}")
+            return False
+        response = func(line_str)
+        if response is None:
+            return False
+        if response is True:
+            return True
+
+    def onecmd(self, line):
+        '''Called when anything is passed in response to the prompt
+        '''
+        if line != '':
+            line_args = parse_line(line)
+            args_str = ''
+            if line_args != []:
+                if len(line_args) == 3:
+                    class_name, method, inst_id = line_args
+                    args_str = ' '.join([class_name, inst_id])
+                elif len(line_args) == 4:
+                    class_name, method, inst_id, attr = line_args
+                    args_str = ' '.join([class_name, inst_id, attr])
+                elif len(line_args) == 5:
+                    class_name, method, inst_id, attr, val = line_args
+                    args_str = ' '.join([class_name, inst_id, attr, val])
+            else:
+                return self.default(line)
+            try:
+                func = getattr(self, 'do_' + method)
+            except AttributeError:
+                print(f"Attribute Not Found: {'do_' + method}")
+            return func(args_str)
+        else:
+            return self.emptyline()
 
     def do_quit(self, line):
         '''Quit command to exit the program
@@ -99,7 +173,8 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, line):
         '''Prints the string form of all instances of the specified class name
         '''
-        if line in HBNBCommand.class_names or line == "":
+        class_name = line.strip()
+        if class_name in HBNBCommand.class_names or line == "":
             obj_dict = storage.all()
             if line:
                 obj_list = [str(item) for item in obj_dict.values()
