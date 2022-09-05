@@ -179,10 +179,22 @@ class HBNBCommand(cmd.Cmd):
             obj_dict = storage.all()
             if line:
                 obj_list = [str(item) for item in obj_dict.values()
-                            if item.__class__.__name__ == line.strip()]
+                            if item.__class__.__name__ == class_name]
             else:
                 obj_list = [str(item) for item in obj_dict.values()]
             print(obj_list)
+        else:
+            print("** class doesn't exist **")
+
+    def do_count(self, line):
+        ''' Takes a class name and prints number of existing instances
+        '''
+        class_name = line.strip()
+        if class_name in HBNBCommand.class_names:
+            obj_dict = storage.all()
+            obj_list = [str(item) for item in obj_dict.values()
+                        if item.__class__.__name__ == class_name]
+            print(len(obj_list))
         else:
             print("** class doesn't exist **")
 
