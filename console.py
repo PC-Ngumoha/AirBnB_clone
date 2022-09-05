@@ -4,6 +4,7 @@ to serve as the console for the HBNB project.'''
 
 
 import cmd
+import re
 from models import storage
 from models.amenity import Amenity
 from models.base_model import BaseModel
