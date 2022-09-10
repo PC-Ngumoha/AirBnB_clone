@@ -1,0 +1,23 @@
+
+header {
+	background-color: white;
+	height: 70px;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCCCCC;
+}
+
+header div {
+	background-image: url('../images/hbnb_logo.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 50px;
+	width: 10%;
+	position: relative;
+	margin: auto 0 auto 20px;
+	top: 50%;
+	transform: translateY(-50%);
+}
