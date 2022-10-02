@@ -1,0 +1,28 @@
+/* General Styles */
+
+html {
+	font-size: 10px;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Circular, "Helvetica Nue", Helvetica, Arial, sans-serif;
+	font-size: 1.4rem;
+	color: #484848;
+}
+
+.container {
+	max-width: 100rem;
+	margin: 3rem auto 3rem auto;
+}
+
+
+/* Mobile Styles */
+@media screen and (max-width: 700px)
+{
+	.container {
+		max-width: 70rem;
+		margin: 3rem auto 3rem auto;
+	}	
+}

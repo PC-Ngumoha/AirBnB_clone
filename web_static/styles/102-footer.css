@@ -1,0 +1,25 @@
+/* General Styles */
+footer{
+	background-color: white;
+	height: 6rem;
+	width: 100%;
+	position: relative;
+	bottom: -5rem;
+	text-align: center;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #CCCCCC;
+}
+
+footer span {
+	display: inline-block;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%)
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 700px)
+{
+	
+}

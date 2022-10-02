@@ -1,0 +1,116 @@
+/* General Styles */
+
+section.filters{
+	background-color: white;
+	width: 100%;
+	height: 7rem;
+	position: relative;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #DDDDDD;
+	border-radius: 4px;	
+}
+
+section.filters button {
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	right: 3rem;
+	transform: translateY(-50%);
+	width: 20%;
+	height: 4.8rem;
+	background-color: #FF5A5F;
+	color: #FFFFFF;
+	font-size: 1.8rem;
+	border-width: 0;
+	border-radius: 4px;
+}
+
+section.filters button:hover {
+	opacity: 90%;
+}
+
+section.filters .locations {
+	display: inline-block;
+	height: 100%;
+	width: 25%;
+	position: absolute;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #DDDDDD;
+	text-align: start;
+	/*padding-left: 5%;*/
+}
+
+section.filters .amenities {
+	display: inline-block;
+	height: 100%;
+	width: 25%;
+	position: absolute;
+	left: 25.1%;
+	text-align: start;
+	/*padding-left: 5%;*/
+}
+
+section.filters h3 {
+	font-weight: 600;
+	margin-bottom: 0;
+	margin-left: 20%;
+}
+
+section.filters h4 {
+	font-weight: 400;
+	font-size: 1.4rem;
+	margin-top: 0;
+	margin-left: 20%;
+}
+
+section.filters .popover {
+	display: none;
+}
+
+section.filters .locations:hover .popover {
+	display: block;
+	width: 100%;
+	list-style: none;
+	padding: 2rem 0 2rem 0;
+	border: 1px solid #DDDDDD;
+	border-radius: 4px;
+	background-color: #FAFAFA;
+}
+
+section.filters .locations:hover .popover>li {
+	margin-left: 10%;
+}
+
+section.filters .locations:hover .popover h2 {
+	margin-bottom: 0;
+	font-size: 1.6rem;
+}
+
+section.filters .locations:hover .popover ul {
+	list-style: none;
+	margin-top: 0;
+}
+
+section.filters .amenities:hover .popover {
+	display: block;
+	width: 100%;
+	list-style: none;
+	/*list-style-position: inside;*/
+	padding: 2rem 0 2rem 0;
+	border: 1px solid #DDDDDD;
+	border-radius: 4px;
+	background-color: #FAFAFA;
+}
+
+section.filters .amenities:hover .popover>li {
+	margin-left: 20%
+}
+
+
+/* Mobile Styles */
+@media screen and (max-width: 700px)
+{
+	
+}
